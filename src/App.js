@@ -5,8 +5,7 @@ import './app.css'
 import {
   BrowserRouter as Router,
   Switch,
-  Route,
-  Link
+  Route
 } from "react-router-dom";
 import GetRoutes from './routes/GetRoutes';
 

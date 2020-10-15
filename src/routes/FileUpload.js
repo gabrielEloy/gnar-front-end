@@ -2,11 +2,13 @@ import React, { Fragment, useState } from 'react';
 import Message from '../components/Message';
 import Progress from '../components/Progress';
 import axios from 'axios';
+import { useHistory } from 'react-router-dom'
 
 const FileUpload = () => {
+  const history = useHistory();
+
   const [file, setFile] = useState('');
   const [filename, setFilename] = useState('Choose File');
-  const [uploadedFile, setUploadedFile] = useState({});
   const [message, setMessage] = useState('');
   const [uploadPercentage, setUploadPercentage] = useState(0);
 
@@ -43,12 +45,10 @@ const FileUpload = () => {
           setTimeout(() => setUploadPercentage(0), 10000);
         }
       });
-
-      const { fileName, filePath } = res.data;
-
-      setUploadedFile({ fileName, filePath });
-
+      console.log(res.data)
+      const { uploadId } = res.data;
       setMessage('File Uploaded');
+      setTimeout(() => {history.push(`/uploads/${uploadId}`)}, 1000)
     } catch (err) {
       setMessage('There was a problem with the server');
     }
@@ -78,14 +78,6 @@ const FileUpload = () => {
           className='btn btn-primary btn-block mt-4'
         />
       </form>
-      {uploadedFile ? (
-        <div className='row mt-5'>
-          <div className='col-md-6 m-auto'>
-            <h3 className='text-center'>{uploadedFile.fileName}</h3>
-            <img style={{ width: '100%' }} src={uploadedFile.filePath} alt='' />
-          </div>
-        </div>
-      ) : null}
     </Fragment>
   );
 };
