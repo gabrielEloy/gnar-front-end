@@ -4,19 +4,17 @@ import {
     Link
 } from "react-router-dom";
 
-const Header = () => {
-    return (
-        <h4 className='display-4 text-center mb-4'>
-            <Link to="/">
-                <img
-                    src={logo}
-                    alt="gnar's logo"
-                    className="app__gnar_logo"
-                />
-            </Link>
+const Header = () => (
+    <h4 className='display-4 text-center mb-4'>
+        <Link to="/">
+            <img
+                src={logo}
+                alt="gnar's logo"
+                className="app__gnar_logo"
+            />
+        </Link>
             File Upload
-        </h4>
-    )
-}
+    </h4>
+)
 
 export default Header;

@@ -16,7 +16,8 @@ const FileUpload = () => {
     const fileName = e.target.files[0].name;
     
     if(fileName.split('.')[1] !== 'csv') {
-      alert('only CSV files are accepted')
+      alert('only CSV files are accepted');
+      return;
     }
 
     setFile(e.target.files[0]);
@@ -25,12 +26,16 @@ const FileUpload = () => {
 
   const onSubmit = async e => {
     e.preventDefault();
+    if(!file){
+      setMessage('Try uploading a file');
+      return;
+    }
     const formData = new FormData();
     formData.append('file', file);
     formData.append('fileName', filename);
 
     try {
-      const res = await axios.post('http://localhost:5000/uploads', formData, {
+      const res = await axios.post(`${process.env.REACT_APP_API}/uploads`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
         },
