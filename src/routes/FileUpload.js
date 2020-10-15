@@ -12,9 +12,11 @@ const FileUpload = () => {
 
   const onChange = e => {
     const fileName = e.target.files[0].name;
+    
     if(fileName.split('.')[1] !== 'csv') {
       alert('only CSV files are accepted')
     }
+
     setFile(e.target.files[0]);
     setFilename(e.target.files[0].name);
   };
@@ -23,7 +25,7 @@ const FileUpload = () => {
     e.preventDefault();
     const formData = new FormData();
     formData.append('file', file);
-    formData.append('fileName', 'teste');
+    formData.append('fileName', filename);
 
     try {
       const res = await axios.post('http://localhost:5000/uploads', formData, {
